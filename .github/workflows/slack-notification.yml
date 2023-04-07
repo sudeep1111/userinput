@@ -3,6 +3,7 @@ on: [push]
 jobs:
   notify:
     runs-on: ubuntu-latest
+      github.base_ref == 'main' && github.event_name == 'action' }}
     steps:
     - name: Notify
       uses: rtCamp/action-slack-notify@v2.2.0

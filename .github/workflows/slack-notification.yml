@@ -1,0 +1,12 @@
+name: Slack Notification
+on: [push]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Notify
+      uses: rtCamp/action-slack-notify@v2.2.0
+      env:
+        SLACK_WEBHOOK: ${{ secrets.https://hooks.slack.com/services/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 }}
+        SLACK_CHANNEL: '#general'
+        SLACK_MESSAGE: 'A push event occurred on the repository.'

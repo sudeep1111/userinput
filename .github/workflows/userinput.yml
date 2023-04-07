@@ -1,0 +1,15 @@
+name: Convert Input to Capital
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_input:
+        description: 'Enter a string to convert to capital letters'
+        required: true
+
+jobs:
+  capitalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Convert Input to Capital
+        run: echo "${{ github.event.inputs.user_input }}" | tr '[:lower:]' '[:upper:]'

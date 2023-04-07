@@ -1,14 +1,12 @@
-name: Slack Notification"
+name: Slack Notification
 
 on:
   workflow_run:
-    workflows:
-      - "userinput.yml"
-    types:
-      - completed
+    types: [completed]
 
 jobs:
   slack-notification:
+    if: ${{ github.event.workflow_run.event == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
       - name: Notify Slack
@@ -17,5 +15,4 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.https://hooks.slack.com/services/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 }}
           SLACK_USERNAME: "GitHub Actions"
           SLACK_ICON_EMOJI: ":rocket:"
-          SLACK_MESSAGE: "Workflow *${{ github.event.workflow.name }}* has completed with status *${{ github.event.workflow.conclusion }}*""
-
+          SLACK_MESSAGE: "Workflow *${{ github.event.workflow_run.workflow.name }}* has completed with status *${{ github.event.workflow_run.conclusion }}*"

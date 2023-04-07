@@ -9,4 +9,4 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.https://hooks.slack.com/services/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 }}
         SLACK_CHANNEL: '#general'
-        SLACK_MESSAGE: 'A push event occurred on the repository.'
+        SLACK_MESSAGE: 'A push event 1 occurred on the repository.'

@@ -6,10 +6,14 @@ on:
       user_input:
         description: 'Enter a string to convert to capital letters'
         required: true
+      environment:
+        required: true
+        type: string        
 
 jobs:
   capitalize:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}    
     steps:
       - name: Convert Input to Capital
         run: echo "${{ github.event.inputs.user_input }}" | tr '[:lower:]' '[:upper:]'

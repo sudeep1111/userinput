@@ -34,8 +34,6 @@ jobs:
           done
           echo $reviewers_string
           gh pr create -B ${{ inputs.base_branch }} -H ${{ inputs.head_branch }} \
-          --title "Merge deploy into main" \
-          --body "This merges the state of the deploy branch into main." \
+          --title "Merge deploy into DEV" \
+          --body "This merges the state of the deploy branch into DEV." \
           $reviewers_string
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

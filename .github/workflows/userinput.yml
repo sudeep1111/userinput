@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       user_input:
-        description: 'Enter a string to convert to capital letter'
+        description: 'Enter a string to convert to capital letters'
         required: true
 
 jobs:

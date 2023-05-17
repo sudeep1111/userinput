@@ -12,7 +12,8 @@ on:
 
 jobs:
   capitalize:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Convert Input to Capital
         run: echo "${{ github.event.inputs.user_input }}" | tr '[:lower:]' '[:upper:]'

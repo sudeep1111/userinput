@@ -4,20 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       user_input:
-        description: 'Enter a string to convert to capital letters'
+        description: 'Enter a string to convert to capital '
         required: true
+      environment:
+        required: true
+        type: string        
 
 jobs:
-  create-pr:
-    name: "Target PR to Main Branch"
-    uses: sudeep1111/userinput/.github/workflows/create-pr.yaml@DEV
-    with:
-      github_reviewers: "naveen184"
-      base_branch: DEV
-      head_branch: deploy
-    secrets: inherit
   capitalize:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}    
     steps:
       - name: Convert Input to Capital
         run: echo "${{ github.event.inputs.user_input }}" | tr '[:lower:]' '[:upper:]'

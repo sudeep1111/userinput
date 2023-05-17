@@ -1,0 +1,39 @@
+name: 'Branch Push Terraform Apply'
+on:
+  workflow_call:
+    # This describes the standard folder path for our terraform repo's where the below is interpolated into:
+    # main/providers/${{ inputs.tf-cloud }}/${{ inputs.tf-region }}/${{ inputs.tf-project }}/${{ inputs.tf-infra }}
+    inputs:
+      github_reviewers:
+        required: true
+        type: string
+      base_branch:
+        required: true
+        type: string
+      head_branch:
+        required: true
+        type: string
+
+jobs:
+  update:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        # https://github.com/actions/checkout
+        uses: actions/checkout@v3
+      - name: create pull request
+        run: |
+          echo $github_reviewers
+          github_reviewers=(${{ inputs.github_reviewers }})
+          reviewers_string=
+
+          for i in "${github_reviewers[@]}"
+          do
+            reviewers_string="$reviewers_string \
+            --reviewer $i"
+          done
+          echo $reviewers_string
+          gh pr create -B ${{ inputs.base_branch }} -H ${{ inputs.head_branch }} \
+          --title "Merge deploy into DEV" \
+          --body "This merges the state of the deploy branch into DEV." \
+          $reviewers_string

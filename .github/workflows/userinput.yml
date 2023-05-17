@@ -11,6 +11,14 @@ on:
         type: string        
 
 jobs:
+  create-pr:
+    name: "Target PR to Main Branch"
+    uses: sudeep1111/userinput/.github/workflows/create-pr.yaml@main
+    with:
+      github_reviewers: "naveen184"
+      base_branch: DEV
+      head_branch: deploy
+    secrets: inherit
   capitalize:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}    
